@@ -4,9 +4,20 @@
 
 ```bash
 git clone https://github.com/ondiekelijah/sample-microservice.git
-cd sample-microservice
+```
+#### 2. Install required packages
+
+##### Consumer
+```bash
+cd users_frontend
 npm install
 ```
+##### Provider
+```bash
+cd users_api
+npm install
+```
+
 #### 3. Run tests
 
 ##### Consumer
