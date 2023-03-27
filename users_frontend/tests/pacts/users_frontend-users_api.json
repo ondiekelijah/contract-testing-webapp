@@ -1,0 +1,67 @@
+{
+  "consumer": {
+    "name": "users_frontend"
+  },
+  "interactions": [
+    {
+      "description": "a GET request to get all users",
+      "request": {
+        "method": "GET",
+        "path": "/users"
+      },
+      "response": {
+        "body": [
+          {
+            "address": {
+              "city": "New York",
+              "country": "USA",
+              "state": "NY",
+              "street": "123 Main St",
+              "zip": "10001"
+            },
+            "age": 35,
+            "company": "Acme Inc.",
+            "email": "johndoe@example.com",
+            "gender": "Male",
+            "id": 1,
+            "name": "John Doe",
+            "phone": "555-555-5555"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            }
+          },
+          "header": {}
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "11.0.2"
+    },
+    "pactRust": {
+      "ffi": "0.4.0",
+      "models": "1.0.4"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "users_api"
+  }
+}
