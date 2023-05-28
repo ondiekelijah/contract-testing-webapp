@@ -11,9 +11,9 @@
       },
       "response": {
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "text/html; charset=utf-8"
         },
-        "status": 204
+        "status": 200
       }
     },
     {
@@ -24,20 +24,24 @@
       },
       "response": {
         "body": {
-          "address": {
-            "city": "Los Angeles",
-            "country": "USA",
-            "state": "CA",
-            "street": "456 Oak St",
-            "zip": "90001"
+          "entity": {
+            "address": {
+              "city": "Los Angeles",
+              "country": "USA",
+              "state": "CA",
+              "street": "456 Oak St",
+              "zip": "90001"
+            },
+            "age": 28,
+            "company": "XYZ Corp.",
+            "email": "janesmith@example.com",
+            "gender": "Female",
+            "id": 2,
+            "name": "Jane Smith",
+            "phone": "555-555-1234"
           },
-          "age": 28,
-          "company": "XYZ Corp.",
-          "email": "janesmith@example.com",
-          "gender": "Female",
-          "id": 2,
-          "name": "Jane Smith",
-          "phone": "555-555-1234"
+          "message": "Entity with id 2 successfully retrieved",
+          "status": "success"
         },
         "headers": {
           "Content-Type": "application/json"
@@ -52,40 +56,46 @@
         "path": "/users"
       },
       "response": {
-        "body": [
-          {
-            "address": {
-              "city": "New York",
-              "country": "USA",
-              "state": "NY",
-              "street": "123 Main St",
-              "zip": "10001"
+        "body": {
+          "entities": [
+            {
+              "address": {
+                "city": "New York",
+                "country": "USA",
+                "state": "NY",
+                "street": "123 Main St",
+                "zip": "10001"
+              },
+              "age": 35,
+              "company": "Acme Inc.",
+              "email": "johndoe@example.com",
+              "gender": "Male",
+              "id": 1,
+              "name": "John Doe",
+              "phone": "555-555-5555"
             },
-            "age": 35,
-            "company": "Acme Inc.",
-            "email": "johndoe@example.com",
-            "gender": "Male",
-            "id": 1,
-            "name": "John Doe",
-            "phone": "555-555-5555"
-          }
-        ],
+            {
+              "address": {
+                "city": "Los Angeles",
+                "country": "USA",
+                "state": "CA",
+                "street": "456 Oak St",
+                "zip": "90001"
+              },
+              "age": 28,
+              "company": "XYZ Corp.",
+              "email": "janesmith@example.com",
+              "gender": "Female",
+              "id": 2,
+              "name": "Jane Smith",
+              "phone": "555-555-1234"
+            }
+          ],
+          "message": "Entities successfully retrieved",
+          "status": "success"
+        },
         "headers": {
           "Content-Type": "application/json"
-        },
-        "matchingRules": {
-          "body": {
-            "$": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "type",
-                  "min": 1
-                }
-              ]
-            }
-          },
-          "header": {}
         },
         "status": 200
       }
@@ -105,6 +115,7 @@
           "company": "Meta Inc.",
           "email": "mikey@example.com",
           "gender": "Male",
+          "id": 4,
           "name": "Mikey Mouse",
           "phone": "555-555-5555"
         },
@@ -116,20 +127,24 @@
       },
       "response": {
         "body": {
-          "address": {
-            "city": "New York",
-            "country": "USA",
-            "state": "NY",
-            "street": "123 Main St",
-            "zip": "10001"
-          },
-          "age": 22,
-          "company": "Meta Inc.",
-          "email": "mikey@example.com",
-          "gender": "Male",
-          "id": 3,
-          "name": "Mikey Mouse",
-          "phone": "555-555-5555"
+          "message": "Entity with id 3 was successfully inserted",
+          "status": "success",
+          "user": {
+            "address": {
+              "city": "New York",
+              "country": "USA",
+              "state": "NY",
+              "street": "123 Main St",
+              "zip": "10001"
+            },
+            "age": 22,
+            "company": "Meta Inc.",
+            "email": "mikey@example.com",
+            "gender": "Male",
+            "id": 3,
+            "name": "Mikey Mouse",
+            "phone": "555-555-5555"
+          }
         },
         "headers": {
           "Content-Type": "application/json"
@@ -142,19 +157,19 @@
       "request": {
         "body": {
           "address": {
-            "city": "New York",
+            "city": "Los Angeles",
             "country": "USA",
-            "state": "NY",
-            "street": "123 Main St",
-            "zip": "10001"
+            "state": "CA",
+            "street": "456 Oak St",
+            "zip": "90001"
           },
-          "age": 22,
-          "company": "Meta Inc.",
-          "email": "mikey@example.com",
-          "gender": "Male",
+          "age": 28,
+          "company": "XYZ Corp.",
+          "email": "bob@gmail.com",
+          "gender": "Female",
           "id": 3,
-          "name": "The Mikey Mouse",
-          "phone": "555-555-5555"
+          "name": "Mr Bob Johnson",
+          "phone": "555-555-1234"
         },
         "headers": {
           "Content-Type": "application/json"
@@ -164,20 +179,24 @@
       },
       "response": {
         "body": {
-          "address": {
-            "city": "New York",
-            "country": "USA",
-            "state": "NY",
-            "street": "123 Main St",
-            "zip": "10001"
+          "entitiy": {
+            "address": {
+              "city": "Los Angeles",
+              "country": "USA",
+              "state": "CA",
+              "street": "456 Oak St",
+              "zip": "90001"
+            },
+            "age": 28,
+            "company": "XYZ Corp.",
+            "email": "bob@gmail.com",
+            "gender": "Female",
+            "id": "3",
+            "name": "Mr Bob Johnson",
+            "phone": "555-555-1234"
           },
-          "age": 22,
-          "company": "Meta Inc.",
-          "email": "mikey@example.com",
-          "gender": "Male",
-          "id": 3,
-          "name": "The Mikey Mouse",
-          "phone": "555-555-5555"
+          "message": "Entity with id 3 was successfully updated",
+          "status": "success"
         },
         "headers": {
           "Content-Type": "application/json"
