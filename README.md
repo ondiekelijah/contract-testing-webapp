@@ -3,19 +3,30 @@
 #### 1. Clone repo and install npm packages
 
 ```bash
-git clone https://github.com/Dev-Elie/Contract-Testing.git
-cd Contract-Testing
+git clone https://github.com/ondiekelijah/sample-microservice.git
+```
+#### 2. Install required packages
+
+##### Consumer
+```bash
+cd users_frontend
 npm install
 ```
-#### 2. Start provider
-
-`npm start`
+##### Provider
+```bash
+cd users_api
+npm install
+```
 
 #### 3. Run tests
 
+##### Consumer
 ```bash
-npm run test:consumer
-npm run test:provider
+cd users_frontend
+npm test
 ```
-// "test": "jest tests/consumer.spec.js && jest tests/provider.spec.js",
-
+##### Provider
+```bash
+cd users_api
+npm test
+```
