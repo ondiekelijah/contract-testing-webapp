@@ -1,12 +1,13 @@
-// To store the pact file in a different directory, we can use the dir option. 
+// To store the pact file in a different directory, we can use the dir option.
 // The path module is used to resolve the path to the directory where the pact file will be stored. The dir option defaults to the current working directory.
 const path = require("path");
 // Import the client from where our app methods are defined. e.g. getAllUsers()
 const UserService = require("../client");
 // Import Pact library
-const { PactV3 } = require("@pact-foundation/pact");
+const { PactV3, Matchers } = require("@pact-foundation/pact");
 
-// We use the describe function to group our tests together 
+
+// We use the describe function to group our tests together
 describe("Test", () => {
   // Pact mock server url
   const mock_port = 1234;
@@ -57,6 +58,22 @@ describe("Test", () => {
         phone: "555-555-1234",
         company: "XYZ Corp.",
       },
+      {
+        id: 3,
+        name: "Bob Johnson",
+        email: "bob@gmail.com",
+        age: 28,
+        gender: "Female",
+        address: {
+          street: "456 Oak St",
+          city: "Los Angeles",
+          state: "CA",
+          zip: "90001",
+          country: "USA",
+        },
+        phone: "555-555-1234",
+        company: "XYZ Corp.",
+      },
     ],
   };
 
@@ -65,6 +82,7 @@ describe("Test", () => {
     // Arrange: Setup our expected interactions between the consumer and provider
     provider
       // Set up expected request
+      .given("Users exist") // This is used to define the state of the provider. e.g When users exist.
       .uponReceiving("a GET request to get all users")
       .withRequest({
         method: "GET",

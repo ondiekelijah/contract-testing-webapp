@@ -4,53 +4,12 @@
   },
   "interactions": [
     {
-      "description": "a DELETE request to delete a user",
-      "request": {
-        "method": "DELETE",
-        "path": "/users/3"
-      },
-      "response": {
-        "headers": {
-          "Content-Type": "text/html; charset=utf-8"
-        },
-        "status": 200
-      }
-    },
-    {
-      "description": "a GET request to get a single user",
-      "request": {
-        "method": "GET",
-        "path": "/users/2"
-      },
-      "response": {
-        "body": {
-          "entity": {
-            "address": {
-              "city": "Los Angeles",
-              "country": "USA",
-              "state": "CA",
-              "street": "456 Oak St",
-              "zip": "90001"
-            },
-            "age": 28,
-            "company": "XYZ Corp.",
-            "email": "janesmith@example.com",
-            "gender": "Female",
-            "id": 2,
-            "name": "Jane Smith",
-            "phone": "555-555-1234"
-          },
-          "message": "Entity with id 2 successfully retrieved",
-          "status": "success"
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "status": 200
-      }
-    },
-    {
       "description": "a GET request to get all users",
+      "providerStates": [
+        {
+          "name": "Users exist"
+        }
+      ],
       "request": {
         "method": "GET",
         "path": "/users"
@@ -89,113 +48,25 @@
               "id": 2,
               "name": "Jane Smith",
               "phone": "555-555-1234"
+            },
+            {
+              "address": {
+                "city": "Los Angeles",
+                "country": "USA",
+                "state": "CA",
+                "street": "456 Oak St",
+                "zip": "90001"
+              },
+              "age": 28,
+              "company": "XYZ Corp.",
+              "email": "bob@gmail.com",
+              "gender": "Female",
+              "id": 3,
+              "name": "Bob Johnson",
+              "phone": "555-555-1234"
             }
           ],
           "message": "Entities successfully retrieved",
-          "status": "success"
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "status": 200
-      }
-    },
-    {
-      "description": "a POST request to create a user",
-      "request": {
-        "body": {
-          "address": {
-            "city": "New York",
-            "country": "USA",
-            "state": "NY",
-            "street": "123 Main St",
-            "zip": "10001"
-          },
-          "age": 22,
-          "company": "Meta Inc.",
-          "email": "mikey@example.com",
-          "gender": "Male",
-          "id": 4,
-          "name": "Mikey Mouse",
-          "phone": "555-555-5555"
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "method": "POST",
-        "path": "/users"
-      },
-      "response": {
-        "body": {
-          "message": "Entity with id 3 was successfully inserted",
-          "status": "success",
-          "user": {
-            "address": {
-              "city": "New York",
-              "country": "USA",
-              "state": "NY",
-              "street": "123 Main St",
-              "zip": "10001"
-            },
-            "age": 22,
-            "company": "Meta Inc.",
-            "email": "mikey@example.com",
-            "gender": "Male",
-            "id": 3,
-            "name": "Mikey Mouse",
-            "phone": "555-555-5555"
-          }
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "status": 201
-      }
-    },
-    {
-      "description": "a PUT request to update a user",
-      "request": {
-        "body": {
-          "address": {
-            "city": "Los Angeles",
-            "country": "USA",
-            "state": "CA",
-            "street": "456 Oak St",
-            "zip": "90001"
-          },
-          "age": 28,
-          "company": "XYZ Corp.",
-          "email": "bob@gmail.com",
-          "gender": "Female",
-          "id": 3,
-          "name": "Mr Bob Johnson",
-          "phone": "555-555-1234"
-        },
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "method": "PUT",
-        "path": "/users/3"
-      },
-      "response": {
-        "body": {
-          "entitiy": {
-            "address": {
-              "city": "Los Angeles",
-              "country": "USA",
-              "state": "CA",
-              "street": "456 Oak St",
-              "zip": "90001"
-            },
-            "age": 28,
-            "company": "XYZ Corp.",
-            "email": "bob@gmail.com",
-            "gender": "Female",
-            "id": "3",
-            "name": "Mr Bob Johnson",
-            "phone": "555-555-1234"
-          },
-          "message": "Entity with id 3 was successfully updated",
           "status": "success"
         },
         "headers": {

@@ -103,6 +103,24 @@ class Controller {
       };
     }
   }
+
+  // Delete all entities
+  clearAll() {
+    try {
+      this.entities = [];
+      return {
+        status: "success",
+        message: "All entities were successfully removed",
+      };
+    } catch (error) {
+      // Handle any other exceptions that might occur
+      return {
+        status: "error",
+        message: `Unexpected error occurred: ${error.message}`,
+      };
+    }
+  }
+
   
   getNextId() {
     return this.entities.length + 1;
