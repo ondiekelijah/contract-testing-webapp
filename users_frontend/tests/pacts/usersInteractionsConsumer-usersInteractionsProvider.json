@@ -1,6 +1,6 @@
 {
   "consumer": {
-    "name": "users_frontend"
+    "name": "usersInteractionsConsumer"
   },
   "interactions": [
     {
@@ -89,6 +89,6 @@
     }
   },
   "provider": {
-    "name": "users_api"
+    "name": "usersInteractionsProvider"
   }
 }
