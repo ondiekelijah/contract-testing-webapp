@@ -28,7 +28,7 @@ describe("Pact Verification", () => {
     
       // Fetch pacts from broker
       pactBrokerUrl: process.env.PACT_BROKER_URL,
-      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
+      pactBrokerToken: process.env.PACT_BROKER_TOKENNNN,
     
       publishVerificationResult: true,
       providerVersion: "1.0.0", // Should be the same version used to publish the pacts
