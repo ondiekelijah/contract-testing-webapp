@@ -40,17 +40,6 @@ jobs:
           pactfiles: users_frontend/tests/pacts
           application_name: "usersInteractionsConsumer"
 
-  pact-create-tag:
-    needs: publish-pact-files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Create Tag
-        uses: pactflow/actions/create-version-tag@v1.0.1
-        env:
-          tag: prod-${{ github.sha }} # setting the tag to prod-git sha
-          application_name: "usersInteractionsProvider"
-
   provider-tests:
     needs: pact-create-tag
     runs-on: ubuntu-latest
@@ -64,3 +53,16 @@ jobs:
         run: cd users_api && npm ci
       - name: Run Provider Verification
         run: cd users_api && npm test
+
+  pact-create-tag:
+    needs: publish-pact-files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Tag
+        uses: pactflow/actions/create-version-tag@v1.0.1
+        env:
+          tag: prod-${{ github.sha }} # setting the tag to prod-git sha
+          application_name: "usersInteractionsProvider"
+
+
