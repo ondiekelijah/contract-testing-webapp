@@ -23,16 +23,9 @@ describe("Pact Verification", () => {
 
     // Verification Options
     const options = {
+      // Required
       provider: "usersInteractionsProvider",
       providerBaseUrl: "http://localhost:5000",
-    
-      // Fetch pacts from broker
-      pactBrokerUrl: process.env.PACT_BROKER_URL,
-      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
-    
-      publishVerificationResult: true,
-      providerVersion: "1.0.0", // Should be the same version used to publish the pacts
-
       disableSSLVerification: true,
       logLevel: "DEBUG",
       pactUrls: [
@@ -41,6 +34,17 @@ describe("Pact Verification", () => {
           "../users_frontend/tests/pacts/usersInteractionsConsumer-usersInteractionsProvider.json"
         ),
       ],
+    
+      // Fetch pacts from broker
+      pactBrokerUrl: process.env.PACT_BROKER_URL,
+      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
+
+      // Publish verification results to broker
+      publishVerificationResult: true, //recommended to only publish from CI by setting the value to `process.env.CI === 'true'`
+      providerVersion: process.env.MY_CI_COMMIT, //recommended to be the git sha eg. process.env.MY_CI_COMMIT
+      providerVersionBranch: process.env.MY_GIT_SHA, //recommended to be the git branch eg. process.env.MY_GIT_SHA
+      providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
+
 
       // State Handlers
       stateHandlers: {
