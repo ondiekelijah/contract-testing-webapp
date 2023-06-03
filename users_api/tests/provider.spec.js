@@ -49,7 +49,7 @@ describe("Pact Verification", () => {
       publishVerificationResult: true, //recommended to only publish from CI by setting the value to `process.env.CI === 'true'`
       providerVersion: process.env.MY_CI_COMMIT, //recommended to be the git sha eg. process.env.MY_CI_COMMIT
       providerVersionBranch: "main", //recommended to be the git branch eg. process.env.MY_CI_BRANCH
-      providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
+      providerVersionTags: [process.env.MY_CI_BRANCH], //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
 
       // State Handlers
       stateHandlers: {
