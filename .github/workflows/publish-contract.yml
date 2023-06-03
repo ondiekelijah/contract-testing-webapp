@@ -1,25 +1,26 @@
-env:
-    version: "1.2.3"
-    PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
-  
-  jobs:
-    pact-create-tag:
-      runs-on: ubuntu-latest
-      env:
-        application_name: "my-api-provider"
-      steps:
-        - uses: pactflow/actions/create-version-tag@v1.0.1
-          env:
-            tag: prod
-  
-    publish-pact-files:
-      runs-on: ubuntu-latest
-      env:
-        application_name: "my_api_consumer"
-        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-      steps:
-        - uses: actions/checkout@v2
-        - uses: pactflow/actions/publish-pact-files@v1.0.1
-          env:
-            pactfiles: src/pactfiles
-  
+on: [push, pull_request]
+
+jobs:
+  pact-create-tag:
+    runs-on: ubuntu-latest
+    env:
+      version: "1.2.3"
+      application_name: "my-api-provider"
+      PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+    steps:
+      - uses: pactflow/actions/create-version-tag@v1.0.1
+        env:
+          tag: prod
+
+  publish-pact-files:
+    runs-on: ubuntu-latest
+    env:
+      version: "1.2.3"
+      application_name: "my_api_consumer"
+      PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+      PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pactflow/actions/publish-pact-files@v1.0.1
+        env:
+          pactfiles: src/pactfiles
