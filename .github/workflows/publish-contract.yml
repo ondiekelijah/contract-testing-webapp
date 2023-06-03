@@ -41,7 +41,7 @@ jobs:
       CI: 'true' # setting CI to true
       MY_CI_COMMIT: ${{ github.sha }} # setting MY_CI_COMMIT to the git sha
       MY_GIT_SHA: ${{ github.sha }} # setting MY_GIT_SHA to the git sha
-      MY_CI_BRANCH: ${{ github.ref }} # setting MY_CI_BRANCH to the git branch
+      MY_CI_BRANCH: ${{ github.ref#refs/heads/ }} # setting MY_CI_BRANCH to the branch name
     steps:
         # Print environment variables for debugging
       - name: Print environment variables
