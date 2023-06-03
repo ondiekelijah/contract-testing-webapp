@@ -23,4 +23,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: pactflow/actions/publish-pact-files@v1.0.1
         env:
-          pactfiles: src/pactfiles
+          pactfiles: users_frontend/tests/pacts
