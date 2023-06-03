@@ -20,7 +20,6 @@ jest.setTimeout(10000); // Increase timeout to 10 seconds for all tests in this 
 
 describe("Pact Verification", () => {
   it("verifies the provider", async () => {
-
     // Verification Options
     const options = {
       // Required
@@ -34,7 +33,7 @@ describe("Pact Verification", () => {
           "../users_frontend/tests/pacts/usersInteractionsConsumer-usersInteractionsProvider.json"
         ),
       ],
-    
+
       // Fetch pacts from broker
       pactBrokerUrl: process.env.PACT_BROKER_BASE_URL,
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
@@ -46,11 +45,11 @@ describe("Pact Verification", () => {
       // providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
 
       // Publish verification results to broker
+      // Publish verification results to broker
       publishVerificationResult: true, //recommended to only publish from CI by setting the value to `process.env.CI === 'true'`
       providerVersion: process.env.MY_CI_COMMIT, //recommended to be the git sha eg. process.env.MY_CI_COMMIT
-      providerVersionBranch: process.env.MY_GIT_BRANCH, //recommended to be the git branch eg. process.env.MY_GIT_BRANCH
-      providerVersionTags: process.env.MY_CI_BRANCH.split(','), //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH.split(',')
-
+      providerVersionBranch: "main", //recommended to be the git branch eg. process.env.MY_CI_BRANCH
+      providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
 
       // State Handlers
       stateHandlers: {
@@ -61,21 +60,20 @@ describe("Pact Verification", () => {
       // Before and After Hooks
       // These functions are called before and after verification begins
       beforeEach: () => {
-        console.log('Starting Pact Verification')
+        console.log("Starting Pact Verification");
       },
-    
+
       afterEach: () => {
-        console.log('Pact Verification Complete!')
+        console.log("Pact Verification Complete!");
       },
 
       // Request Filters
       requestFilter: (req, res, next) => {
         // This function can be used to modify the request before it is sent to the provider
         // e.g. add authentication headers, strip out sensitive data
-        console.log('I run before each request')
-        next()
-      }
-
+        console.log("I run before each request");
+        next();
+      },
     };
     // Verify the provider with the pact file then stop the server
     const verifier = new Verifier(options);
