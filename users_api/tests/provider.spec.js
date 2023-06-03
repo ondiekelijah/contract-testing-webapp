@@ -40,10 +40,16 @@ describe("Pact Verification", () => {
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
 
       // Publish verification results to broker
+      // publishVerificationResult: true, //recommended to only publish from CI by setting the value to `process.env.CI === 'true'`
+      // providerVersion: process.env.MY_CI_COMMIT, //recommended to be the git sha eg. process.env.MY_CI_COMMIT
+      // providerVersionBranch: process.env.MY_GIT_SHA, //recommended to be the git branch eg. process.env.MY_GIT_SHA
+      // providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
+
+      // Publish verification results to broker
       publishVerificationResult: true, //recommended to only publish from CI by setting the value to `process.env.CI === 'true'`
       providerVersion: process.env.MY_CI_COMMIT, //recommended to be the git sha eg. process.env.MY_CI_COMMIT
-      providerVersionBranch: process.env.MY_GIT_SHA, //recommended to be the git branch eg. process.env.MY_GIT_SHA
-      providerVersionTags: process.env.MY_CI_BRANCH, //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH
+      providerVersionBranch: process.env.MY_GIT_BRANCH, //recommended to be the git branch eg. process.env.MY_GIT_BRANCH
+      providerVersionTags: process.env.MY_CI_BRANCH.split(','), //optional, recommended to be the git branch eg. process.env.MY_CI_BRANCH.split(',')
 
 
       // State Handlers
