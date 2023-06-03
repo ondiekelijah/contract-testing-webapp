@@ -30,19 +30,6 @@
 on: [push, pull_request]
 
 jobs:
-  pact-create-tag:
-    runs-on: ubuntu-latest
-    env:
-      version: ${{ github.sha }} # setting the git sha to version
-      application_name: "usersInteractionsProvider"
-      PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
-      PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: pactflow/actions/create-version-tag@v1.0.1
-        env:
-          tag: prod-${{ github.sha }} # setting the tag to prod-git sha
-
   publish-pact-files:
     runs-on: ubuntu-latest
     env:
@@ -62,3 +49,18 @@ jobs:
           MY_CI_COMMIT: ${{ github.sha }} # setting MY_CI_COMMIT to the git sha
           MY_GIT_SHA: ${{ github.sha }} # setting MY_GIT_SHA to the git sha
           MY_CI_BRANCH: ${{ github.ref }} # setting MY_CI_BRANCH to the git branch
+
+  pact-create-tag:
+    needs: publish-pact-files
+    runs-on: ubuntu-latest
+    env:
+      version: ${{ github.sha }} # setting the git sha to version
+      application_name: "usersInteractionsProvider"
+      PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+      PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pactflow/actions/create-version-tag@v1.0.1
+        env:
+          tag: prod-${{ github.sha }} # setting the tag to prod-git sha
+
