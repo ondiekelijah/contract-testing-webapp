@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: pactflow/actions/create-version-tag@v1.0.1
         env:
-          tag: prod
+          tag: dev
 
   publish-pact-files:
     runs-on: ubuntu-latest
