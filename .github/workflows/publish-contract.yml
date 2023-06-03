@@ -42,6 +42,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Print environment variables
+        run: |
+          echo "CI=$CI"
+          echo "MY_CI_COMMIT=$MY_CI_COMMIT"
+          echo "MY_GIT_SHA=$MY_GIT_SHA"
+          echo "MY_CI_BRANCH=$MY_CI_BRANCH"
       - name: Get the version number
         id: get_version
         run: echo "VERSION=$(git describe --tags)" >> $GITHUB_ENV
@@ -52,6 +59,11 @@ jobs:
           MY_CI_COMMIT: ${{ github.sha }} # setting MY_CI_COMMIT to the git sha
           MY_GIT_SHA: ${{ github.sha }} # setting MY_GIT_SHA to the git sha
           MY_CI_BRANCH: ${{ github.ref }} # setting MY_CI_BRANCH to the git branch
+          # Printing the env variables
+            # echo "CI=$CI"
+            # echo "MY_CI_COMMIT=$MY_CI_COMMIT"
+            # echo "MY_GIT_SHA=$MY_GIT_SHA"
+            # echo "MY_CI_BRANCH=$MY_CI_BRANCH"
 
   pact-create-tag:
     needs: publish-pact-files
@@ -68,3 +80,5 @@ jobs:
         env:
           tag: prod-${{ github.sha }} # setting the tag to prod-git sha
 
+# publish-provider-contract action
+# on: [push, pull_request]
