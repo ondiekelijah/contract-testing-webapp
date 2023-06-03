@@ -1,26 +1,38 @@
 const { Verifier } = require("@pact-foundation/pact");
 const path = require("path");
-const { appController } = require("../controllers/controllers");
+const dotenv = require("dotenv");
 const { loadData, app } = require("../provider");
+
+dotenv.config();
 
 // Set up a server to run the consumer tests against
 const server = app.listen(5000, () => {
-  // loadData(); // This is not needed for the provider verification as the stateHandlers will be used instead
-  console.log("Users API listening on port 6000");
+  loadData();
+  console.log("Users API listening on port 5000");
 });
 
 const usersExistState = () => {
-  loadData();
+  // loadData(); This is not needed for the provider verification as the data is already loaded when the server starts
   return Promise.resolve("Users exist");
 };
 
+jest.setTimeout(10000); // Increase timeout to 10 seconds for all tests in this file
+
 describe("Pact Verification", () => {
-  it("verifies the provider", () => {
+  it("verifies the provider", async () => {
 
     // Verification Options
     const options = {
-      provider: "users_api",
+      provider: "usersInteractionsProvider",
       providerBaseUrl: "http://localhost:5000",
+    
+      // Fetch pacts from broker
+      pactBrokerUrl: process.env.PACT_BROKER_URL,
+      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
+    
+      publishVerificationResult: true,
+      providerVersion: "1.0.0", // Should be the same version used to publish the pacts
+
       disableSSLVerification: true,
       logLevel: "DEBUG",
       pactUrls: [
@@ -29,6 +41,7 @@ describe("Pact Verification", () => {
           "../users_frontend/tests/pacts/users_frontend-users_api.json"
         ),
       ],
+
       // State Handlers
       stateHandlers: {
         "": () => {}, // This is the default state handler, it is used if one is not specified for the given state
@@ -38,11 +51,11 @@ describe("Pact Verification", () => {
       // Before and After Hooks
       // These functions are called before and after verification begins
       beforeEach: () => {
-        console.log('I run before everything else')
+        console.log('Starting Pact Verification')
       },
     
       afterEach: () => {
-        console.log('I run after everything else has finished')
+        console.log('Pact Verification Complete!')
       },
 
       // Request Filters
@@ -55,13 +68,12 @@ describe("Pact Verification", () => {
 
     };
     // Verify the provider with the pact file then stop the server
-    return new Verifier(options)
-      .verifyProvider()
-      .then(() => {
-        console.log("Pact Verification Complete!");
-      })
-      .finally(() => {
-        server.close();
-      });
+    const verifier = new Verifier(options);
+
+    try {
+      await verifier.verifyProvider(); // Throws an error if verification fails
+    } finally {
+      server.close();
+    }
   });
 });

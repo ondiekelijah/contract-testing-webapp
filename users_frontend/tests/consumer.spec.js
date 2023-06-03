@@ -4,7 +4,7 @@ const path = require("path");
 // Import the client from where our app methods are defined. e.g. getAllUsers()
 const UserService = require("../client");
 // Import Pact library
-const { PactV3, Matchers } = require("@pact-foundation/pact");
+const { PactV3 } = require("@pact-foundation/pact");
 
 
 // We use the describe function to group our tests together
@@ -14,8 +14,8 @@ describe("Test", () => {
   const mock_server_url = "http://127.0.0.1:" + mock_port;
   // Pact instance to create a 'pact' between the consumer and provider
   const provider = new PactV3({
-    consumer: "users_frontend",
-    provider: "users_api",
+    consumer: "usersInteractionsConsumer",
+    provider: "usersInteractionsProvider",
     port: mock_port,
     dir: path.resolve(process.cwd(), "tests", "pacts"),
     logLevel: "DEBUG",
