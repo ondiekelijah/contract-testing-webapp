@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       version: "1.2.3"
-      application_name: "my-api-provider"
+      application_name: "usersInteractionsProvider"
       PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
     steps:
       - uses: pactflow/actions/create-version-tag@v1.0.1
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       version: "1.2.3"
-      application_name: "my_api_consumer"
+      application_name: "usersInteractionsConsumer"
       PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
       PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
     steps:
