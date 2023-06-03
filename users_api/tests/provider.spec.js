@@ -36,7 +36,7 @@ describe("Pact Verification", () => {
       ],
     
       // Fetch pacts from broker
-      pactBrokerUrl: process.env.PACT_BROKER_URL,
+      pactBrokerUrl: process.env.PACT_BROKER_BASE_URL,
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
 
       // Publish verification results to broker
