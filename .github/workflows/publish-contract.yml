@@ -33,8 +33,8 @@ jobs:
   pact-create-tag:
     runs-on: ubuntu-latest
     env:
-      version: "1.2.3"
-      application_name: "my-api-provider"
+      version: ${{ github.sha }} # setting the git sha to version
+      application_name: "usersInteractionsProvider"
       PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
       PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
     steps:
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       version: ${{ github.sha }} # setting the git sha to version
-      application_name: "my_api_consumer"
+      application_name: "usersInteractionsConsumer"
       PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
       PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
     steps:
