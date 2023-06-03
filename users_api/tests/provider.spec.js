@@ -38,7 +38,7 @@ describe("Pact Verification", () => {
       pactUrls: [
         path.resolve(
           process.cwd(),
-          "../users_frontend/tests/pacts/users_frontend-users_api.json"
+          "../users_frontend/tests/pacts/usersInteractionsConsumer-usersInteractionsProvider.json"
         ),
       ],
 
