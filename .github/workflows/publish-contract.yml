@@ -7,6 +7,7 @@ jobs:
       version: "1.2.3"
       application_name: "usersInteractionsProvider"
       PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+      PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
     steps:
       - uses: pactflow/actions/create-version-tag@v1.0.1
         env:
