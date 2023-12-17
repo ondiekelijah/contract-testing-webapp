@@ -1,30 +1,30 @@
-# Use NodeJS base image
-FROM node:16
+# Use the base image
+FROM gcr.io/educative-exec-env/educative:latest
 
-# Create app directory
-WORKDIR /usr/src/app
+# Create a directory for the user service
+RUN mkdir -p /usr/local/educative/user-service
 
-# Install app dependencies for users_api
-WORKDIR /usr/src/app/users_api
-COPY users_api/package*.json ./
-RUN npm install
+## Copying the contents of users_api to the folder we created in the above command
+COPY users_api /usr/local/educative/user-service
 
-# Bundle app source for users_api
-COPY users_api/ .
+# Install npm dependencies
+RUN cd /usr/local/educative/user-service && \
+    npm install 
 
-# Install app dependencies for users_frontend
-WORKDIR /usr/src/app/users_frontend
-COPY users_frontend/package*.json ./
-RUN npm install
+## Installing Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install yarn
 
-# Bundle app source for users_frontend
-COPY users_frontend/ .
+## Fixing etc/hosts
+RUN echo "127.0.0.1       localhost" >> /etc/hosts && \
+    echo "::1     localhost ip6-localhost ip6-loopback" >> /etc/hosts  && \
+    echo "fe00::0 ip6-localnet" >> /etc/hosts && \
+    echo "ff00::0 ip6-mcastprefix" >> /etc/hosts && \
+    echo "ff02::1 ip6-allnodes" >> /etc/hosts && \
+    echo "ff02::2 ip6-allrouters" >> /etc/hosts && \
+    echo "172.17.0.3      e2d7ddabb2c5" >> /etc/hosts
 
-# Switch back to users_api for the CMD instruction
-WORKDIR /usr/src/app/users_api
+## Installing Tmux
+RUN  apt-get -y install tmux
 
-# Expose port
-EXPOSE 5000
-
-# Start the service
-CMD [ "node", "providerService.js" ]
