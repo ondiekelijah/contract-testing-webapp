@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "age": 35,
+    "gender": "Male",
+    "address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001",
+      "country": "USA"
+    },
+    "phone": "555-555-5555",
+    "company": "Acme Inc."
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "age": 28,
+    "gender": "Female",
+    "address": {
+      "street": "456 Oak St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90001",
+      "country": "USA"
+    },
+    "phone": "555-555-1234",
+    "company": "XYZ Corp."
+  },
+  {
+    "id": 3,
+    "name": "Bob Johnson",
+    "email": "bob@gmail.com",
+    "age": 28,
+    "gender": "Female",
+    "address": {
+      "street": "456 Oak St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90001",
+      "country": "USA"
+    },
+    "phone": "555-555-1234",
+    "company": "XYZ Corp."
+  }
+]
